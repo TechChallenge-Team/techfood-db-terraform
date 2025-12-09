@@ -14,6 +14,8 @@ jobs:
       AWS_REGION: us-east-1
       TF_VAR_rds_username: ${{ secrets.RDS_USERNAME }}
       TF_VAR_rds_password: ${{ secrets.RDS_PASSWORD }}
+      TF_VAR_docdb_master_username: ${{ secrets.DOCDB_USERNAME }}
+      TF_VAR_docdb_master_password: ${{ secrets.DOCDB_PASSWORD }}
 
     steps:
       - name: Checkout code
