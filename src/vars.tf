@@ -50,3 +50,39 @@ variable "rds_backup_retention_period" {
   description = "The days to retain backups for"
   default     = 7
 }
+
+# DocumentDB (MongoDB) variables
+variable "docdb_instance_class" {
+  description = "The instance type of the DocumentDB cluster instances"
+  default     = "db.t3.medium"
+}
+
+variable "docdb_cluster_size" {
+  description = "Number of instances in the DocumentDB cluster"
+  default     = 1
+}
+
+variable "docdb_master_username" {
+  description = "Username for the master DB user in DocumentDB"
+  sensitive   = true
+}
+
+variable "docdb_master_password" {
+  description = "Password for the master DB user in DocumentDB"
+  sensitive   = true
+}
+
+variable "docdb_backup_retention_period" {
+  description = "The days to retain backups for DocumentDB"
+  default     = 7
+}
+
+variable "docdb_preferred_backup_window" {
+  description = "The daily time range during which automated backups are created"
+  default     = "07:00-09:00"
+}
+
+variable "docdb_skip_final_snapshot" {
+  description = "Determines whether a final DB snapshot is created before deletion"
+  default     = true
+}
