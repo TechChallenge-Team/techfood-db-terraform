@@ -32,39 +32,3 @@ resource "aws_security_group" "rds_sg" {
     Name = "${var.projectName}-rds-sg"
   })
 }
-
-# Security Group para DocumentDB (MongoDB)
-resource "aws_security_group" "docdb_sg" {
-  name        = "${var.projectName}-docdb-sg"
-  description = "Security group for DocumentDB (MongoDB)"
-  vpc_id      = data.aws_vpc.vpc.id
-
-  # Acesso interno do EKS
-  ingress {
-    from_port       = 27017
-    to_port         = 27017
-    protocol        = "tcp"
-    security_groups = [data.aws_security_group.eks_sg.id]
-    description     = "MongoDB access from EKS nodes"
-  }
-
-  # Acesso externo (da internet)
-  ingress {
-    from_port   = 27017
-    to_port     = 27017
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-    description = "MongoDB access from internet"
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = merge(var.tags, {
-    Name = "${var.projectName}-docdb-sg"
-  })
-}
